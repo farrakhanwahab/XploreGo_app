@@ -5,6 +5,7 @@ class AppTheme {
         brightness: Brightness.light,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
+        fontFamily: 'Nexa',
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
@@ -19,6 +20,7 @@ class AppTheme {
           brightness: Brightness.dark,
         ),
         useMaterial3: true,
+        fontFamily: 'Nexa',
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,

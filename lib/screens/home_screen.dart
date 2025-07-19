@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import '../providers/country_provider.dart';
 import '../models/country.dart';
 import '../widgets/country_card.dart';
@@ -273,7 +272,7 @@ class HomeScreen extends StatelessWidget {
                     onChanged: provider.search,
                     decoration: InputDecoration(
                       hintText: 'Search countries...',
-                      prefixIcon: const Icon(LucideIcons.search),
+                      prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),

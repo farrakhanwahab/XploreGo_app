@@ -34,7 +34,6 @@ dependencies:
   provider: ^6.1.2
   cached_network_image: ^3.3.1
   shared_preferences: ^2.2.2
-  lucide_icons: ^0.257.0
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +73,14 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: Nexa
+      fonts:
+        - asset: assets/fonts/Nexa-Regular.otf
+        - asset: assets/fonts/Nexa-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Nexa-Light.otf
+          weight: 300
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

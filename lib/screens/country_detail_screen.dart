@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import '../models/country.dart';
 
 class CountryDetailScreen extends StatelessWidget {
@@ -11,7 +10,7 @@ class CountryDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(LucideIcons.arrowLeft),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(country.name),
@@ -36,7 +35,7 @@ class CountryDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Icon(LucideIcons.mapPin, size: 18, color: Colors.grey),
+                Icon(Icons.location_city, size: 18, color: Colors.grey),
                 const SizedBox(width: 6),
                 Text('Capital: ${country.capital}'),
               ],
@@ -44,7 +43,7 @@ class CountryDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Icon(LucideIcons.globe, size: 18, color: Colors.grey),
+                Icon(Icons.public, size: 18, color: Colors.grey),
                 const SizedBox(width: 6),
                 Text('Continent: ${country.continent}'),
               ],
@@ -52,7 +51,7 @@ class CountryDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Icon(LucideIcons.users, size: 18, color: Colors.grey),
+                Icon(Icons.people, size: 18, color: Colors.grey),
                 const SizedBox(width: 6),
                 Text('Population: ${country.population.toString()}'),
               ],
@@ -60,7 +59,7 @@ class CountryDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Icon(LucideIcons.coins, size: 18, color: Colors.grey),
+                Icon(Icons.attach_money, size: 18, color: Colors.grey),
                 const SizedBox(width: 6),
                 Text('Currency: ${country.currencyName} (${country.currencySymbol})'),
               ],
@@ -69,7 +68,7 @@ class CountryDetailScreen extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(LucideIcons.languages, size: 18, color: Colors.grey),
+                Icon(Icons.language, size: 18, color: Colors.grey),
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text('Languages: ${country.languages.join(", ")}'),
@@ -80,7 +79,7 @@ class CountryDetailScreen extends StatelessWidget {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(LucideIcons.utensils, size: 18, color: Colors.grey),
+                  Icon(Icons.restaurant, size: 18, color: Colors.grey),
                   const SizedBox(width: 6),
                   Text('Staple Food: ${country.stapleFood}'),
                 ],
@@ -99,7 +98,7 @@ class CountryDetailScreen extends StatelessWidget {
                   child: ListTile(
                     leading: place.imageUrl.isNotEmpty
                         ? Image.network(place.imageUrl, width: 48, height: 48, fit: BoxFit.cover)
-                        : const Icon(LucideIcons.image),
+                        : const Icon(Icons.image),
                     title: Text(place.name),
                     subtitle: Text(place.description),
                   ),
