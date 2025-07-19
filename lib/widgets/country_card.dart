@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../models/country.dart';
 
 class CountryCard extends StatelessWidget {
@@ -31,8 +32,17 @@ class CountryCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 28,
-                backgroundImage: NetworkImage(country.flagUrl),
                 backgroundColor: Colors.grey[200],
+                child: ClipOval(
+                  child: CachedNetworkImage(
+                    imageUrl: country.flagUrl,
+                    width: 56,
+                    height: 56,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                    errorWidget: (context, url, error) => const Icon(LucideIcons.flag, color: Colors.grey, size: 32),
+                  ),
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(

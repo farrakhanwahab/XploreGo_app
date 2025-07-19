@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/country_provider.dart';
 import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
 
@@ -11,13 +13,16 @@ class XploreGoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'XploreGo',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+    return ChangeNotifierProvider(
+      create: (_) => CountryProvider(),
+      child: MaterialApp(
+        title: 'XploreGo',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        debugShowCheckedModeBanner: false,
+        home: const HomeScreen(),
+      ),
     );
   }
 }

@@ -5,20 +5,33 @@ import '../providers/country_provider.dart';
 import '../models/country.dart';
 import '../widgets/country_card.dart';
 import 'country_detail_screen.dart';
+import 'favorites_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CountryProvider(),
-      child: Consumer<CountryProvider>(
-        builder: (context, provider, _) {
-          return Scaffold(
+    return Consumer<CountryProvider>(
+      builder: (context, provider, _) {
+        return Scaffold(
             appBar: AppBar(
               title: const Text('XploreGo'),
               centerTitle: true,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.favorite),
+                  tooltip: 'Favorites',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const FavoritesScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
             body: Column(
               children: [
@@ -68,8 +81,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           );
-        },
-      ),
+      },
     );
   }
 } 
