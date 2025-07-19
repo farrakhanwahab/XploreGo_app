@@ -11,11 +11,22 @@ class CountryProvider extends ChangeNotifier {
   String _searchQuery = '';
   Set<String> _favoriteCountryNames = {};
 
+  // Filter and sort state
+  Set<String> _selectedContinents = {};
+  Set<String> _selectedLanguages = {};
+  Set<String> _selectedCurrencies = {};
+  String _sort = 'Name (A–Z)';
+
   List<Country> get countries => _filteredCountries;
   bool get isLoading => _isLoading;
   String? get error => _error;
   String get searchQuery => _searchQuery;
   Set<String> get favoriteCountryNames => _favoriteCountryNames;
+
+  Set<String> get selectedContinents => _selectedContinents;
+  Set<String> get selectedLanguages => _selectedLanguages;
+  Set<String> get selectedCurrencies => _selectedCurrencies;
+  String get sort => _sort;
 
   CountryProvider() {
     fetchCountries();
@@ -73,5 +84,60 @@ class CountryProvider extends ChangeNotifier {
 
   bool isFavorite(Country country) => _favoriteCountryNames.contains(country.name);
 
-  // Add filter methods for continent, population, language as needed
+  void setFiltersAndSort({
+    Set<String>? continents,
+    Set<String>? languages,
+    Set<String>? currencies,
+    String? sort,
+  }) {
+    _selectedContinents = continents ?? _selectedContinents;
+    _selectedLanguages = languages ?? _selectedLanguages;
+    _selectedCurrencies = currencies ?? _selectedCurrencies;
+    _sort = sort ?? _sort;
+    _applyFiltersAndSort();
+    notifyListeners();
+  }
+
+  void clearFiltersAndSort() {
+    _selectedContinents.clear();
+    _selectedLanguages.clear();
+    _selectedCurrencies.clear();
+    _sort = 'Name (A–Z)';
+    _applyFiltersAndSort();
+    notifyListeners();
+  }
+
+  void _applyFiltersAndSort() {
+    List<Country> filtered = _countries;
+    if (_selectedContinents.isNotEmpty) {
+      filtered = filtered.where((c) => _selectedContinents.contains(c.continent)).toList();
+    }
+    if (_selectedLanguages.isNotEmpty) {
+      filtered = filtered.where((c) => c.languages.any(_selectedLanguages.contains)).toList();
+    }
+    if (_selectedCurrencies.isNotEmpty) {
+      filtered = filtered.where((c) => _selectedCurrencies.contains(c.currencySymbol) || _selectedCurrencies.contains(c.currencyName)).toList();
+    }
+    // Sort
+    switch (_sort) {
+      case 'Name (A–Z)':
+        filtered.sort((a, b) => a.name.compareTo(b.name));
+        break;
+      case 'Name (Z–A)':
+        filtered.sort((a, b) => b.name.compareTo(a.name));
+        break;
+      case 'Population (asc)':
+        filtered.sort((a, b) => a.population.compareTo(b.population));
+        break;
+      case 'Population (desc)':
+        filtered.sort((a, b) => b.population.compareTo(a.population));
+        break;
+    }
+    _filteredCountries = filtered;
+  }
+
+  // Utility to get all unique values for filter chips
+  List<String> get allContinents => _countries.map((c) => c.continent).toSet().toList()..sort();
+  List<String> get allLanguages => _countries.expand((c) => c.languages).toSet().toList()..sort();
+  List<String> get allCurrencies => _countries.map((c) => c.currencySymbol).toSet().toList()..sort();
 } 
