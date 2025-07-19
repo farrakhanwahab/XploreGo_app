@@ -6,6 +6,7 @@ class AppTheme {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
         fontFamily: 'Nexa',
+        fontFamilyFallback: ['Roboto', 'Arial', 'sans-serif'],
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
@@ -21,6 +22,7 @@ class AppTheme {
         ),
         useMaterial3: true,
         fontFamily: 'Nexa',
+        fontFamilyFallback: ['Roboto', 'Arial', 'sans-serif'],
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
