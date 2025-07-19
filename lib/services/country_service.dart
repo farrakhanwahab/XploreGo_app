@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/country.dart';
 
 class CountryService {
-  static const String _baseUrl = 'https://restcountries.com/v3.1/all';
+  static const String _baseUrl = 'https://restcountries.com/v3.1/all?fields=name,flags,capital,continents,population,currencies,languages';
 
   static Future<List<Country>> fetchCountries() async {
     try {

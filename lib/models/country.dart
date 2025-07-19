@@ -34,16 +34,16 @@ class Country {
     // Parse currency
     String currencyName = '';
     String currencySymbol = '';
-    if (json['currencies'] is Map) {
+    if (json['currencies'] is Map && (json['currencies'] as Map).isNotEmpty) {
       final currency = (json['currencies'] as Map).values.first;
       currencyName = currency['name'] ?? '';
       currencySymbol = currency['symbol'] ?? '';
     }
     return Country(
-      name: json['name']['common'] ?? '',
-      flagUrl: json['flags']['png'] ?? '',
-      capital: (json['capital'] != null && json['capital'] is List && json['capital'].isNotEmpty) ? json['capital'][0] : '',
-      continent: (json['continents'] != null && json['continents'] is List && json['continents'].isNotEmpty) ? json['continents'][0] : '',
+      name: json['name']?['common'] ?? '',
+      flagUrl: json['flags']?['png'] ?? '',
+      capital: (json['capital'] != null && json['capital'] is List && (json['capital'] as List).isNotEmpty) ? json['capital'][0] : '',
+      continent: (json['continents'] != null && json['continents'] is List && (json['continents'] as List).isNotEmpty) ? json['continents'][0] : '',
       population: json['population'] ?? 0,
       currencyName: currencyName,
       currencySymbol: currencySymbol,
