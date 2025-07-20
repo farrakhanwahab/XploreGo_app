@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -8,7 +10,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _isDarkMode = false;
   String _defaultSort = 'Name (A–Z)';
 
   @override
@@ -27,20 +28,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _buildSectionHeader('App Settings', Icons.settings),
           const SizedBox(height: 16),
           
-          // Theme Toggle
-          _buildSettingTile(
-            icon: Icons.dark_mode,
-            title: 'Dark Mode',
-            subtitle: 'Switch between light and dark themes',
-            trailing: Switch(
-              value: _isDarkMode,
-              onChanged: (value) {
-                setState(() {
-                  _isDarkMode = value;
-                });
-                // TODO: Implement theme switching
-              },
-            ),
+          // Theme Mode
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return _buildSettingTile(
+                icon: Icons.dark_mode,
+                title: 'Theme Mode',
+                subtitle: themeProvider.themeModeString,
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => _showThemeOptions(context, themeProvider),
+              );
+            },
           ),
           
           // Default Sort
@@ -180,6 +178,59 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap: onTap,
       ),
     );
+  }
+
+  void _showThemeOptions(BuildContext context, ThemeProvider themeProvider) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Theme Mode',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 20),
+            ...ThemeMode.values.map((mode) => RadioListTile<ThemeMode>(
+                  title: Text(_getThemeModeString(mode)),
+                  subtitle: Text(_getThemeModeDescription(mode)),
+                  value: mode,
+                  groupValue: themeProvider.themeMode,
+                  onChanged: (value) {
+                    themeProvider.setThemeMode(value!);
+                    Navigator.pop(context);
+                  },
+                )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _getThemeModeString(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.light:
+        return 'Light';
+      case ThemeMode.dark:
+        return 'Dark';
+      case ThemeMode.system:
+        return 'System';
+    }
+  }
+
+  String _getThemeModeDescription(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.light:
+        return 'Always use light theme';
+      case ThemeMode.dark:
+        return 'Always use dark theme';
+      case ThemeMode.system:
+        return 'Follow system settings';
+    }
   }
 
   void _showSortOptions(BuildContext context) {

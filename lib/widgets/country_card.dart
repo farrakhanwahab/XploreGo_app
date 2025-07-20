@@ -19,11 +19,15 @@ class CountryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Card(
-      elevation: 3,
+      elevation: 6,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      color: colorScheme.surface,
+      color: isDarkMode 
+          ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.3)
+          : colorScheme.surface,
+      shadowColor: colorScheme.shadow.withValues(alpha: 0.3),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
         onTap: onTap,
@@ -44,13 +48,15 @@ class CountryCard extends StatelessWidget {
                     ),
                   ],
                   border: Border.all(
-                    color: colorScheme.outline.withValues(alpha: 0.3),
+                    color: colorScheme.outline.withValues(alpha: 0.5),
                     width: 2,
                   ),
                 ),
                 child: CircleAvatar(
                   radius: 32,
-                  backgroundColor: colorScheme.surfaceContainerHighest,
+                  backgroundColor: isDarkMode 
+                      ? colorScheme.surfaceContainerHighest.withValues(alpha: 0.5)
+                      : colorScheme.surfaceContainerHighest,
                   child: ClipOval(
                     child: CachedNetworkImage(
                       imageUrl: country.flagUrl,
