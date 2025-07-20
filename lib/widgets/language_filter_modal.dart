@@ -60,7 +60,7 @@ class LanguageFilterModal {
                         width: 40,
                         height: 4,
                         decoration: BoxDecoration(
-                          color: colorScheme.outline.withOpacity(0.3),
+                          color: colorScheme.outline.withValues(alpha: 0.3),
                           borderRadius: BorderRadius.circular(2),
                         ),
                       ),
@@ -103,13 +103,13 @@ class LanguageFilterModal {
                                 }
                               });
                             },
-                            backgroundColor: colorScheme.surfaceVariant,
+                            backgroundColor: colorScheme.surfaceContainerHighest,
                             selectedColor: colorScheme.primary,
                             checkmarkColor: colorScheme.onPrimary,
                             side: BorderSide(
-                              color: selectedLanguages.contains(language) 
-                                  ? colorScheme.primary 
-                                  : colorScheme.outline.withOpacity(0.3),
+                                      color: selectedLanguages.contains(language) 
+            ? colorScheme.primary 
+            : colorScheme.outline.withValues(alpha: 0.3),
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),

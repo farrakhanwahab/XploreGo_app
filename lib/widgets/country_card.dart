@@ -38,19 +38,19 @@ class CountryCard extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: colorScheme.shadow.withOpacity(0.15),
+                      color: colorScheme.shadow.withValues(alpha: 0.15),
                       blurRadius: 8,
                       offset: const Offset(0, 4),
                     ),
                   ],
                   border: Border.all(
-                    color: colorScheme.outline.withOpacity(0.3),
+                    color: colorScheme.outline.withValues(alpha: 0.3),
                     width: 2,
                   ),
                 ),
                 child: CircleAvatar(
                   radius: 32,
-                  backgroundColor: colorScheme.surfaceVariant,
+                  backgroundColor: colorScheme.surfaceContainerHighest,
                   child: ClipOval(
                     child: CachedNetworkImage(
                       imageUrl: country.flagUrl,

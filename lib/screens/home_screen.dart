@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/country_provider.dart';
-import '../models/country.dart';
 import '../widgets/country_card.dart';
 import '../widgets/filter_chips.dart';
 import '../widgets/continent_filter_modal.dart';
@@ -9,9 +8,59 @@ import '../widgets/language_filter_modal.dart';
 import '../widgets/currency_filter_modal.dart';
 import 'country_detail_screen.dart';
 import 'favorites_screen.dart';
+import 'settings_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  final List<Widget> _screens = [
+    const _HomeContent(),
+    const FavoritesScreen(),
+    const SettingsScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_currentIndex],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _currentIndex,
+        onDestinationSelected: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.favorite_outline),
+            selectedIcon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings_outlined),
+            selectedIcon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HomeContent extends StatelessWidget {
+  const _HomeContent();
 
   void _openSortModal(BuildContext context) {
     final provider = Provider.of<CountryProvider>(context, listen: false);
@@ -61,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: colorScheme.outline.withOpacity(0.3),
+                      color: colorScheme.outline.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -70,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                   // Sort Options
                   Card(
                     elevation: 0,
-                    color: colorScheme.surfaceVariant.withOpacity(0.3),
+                    color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
@@ -167,18 +216,6 @@ class HomeScreen extends StatelessWidget {
             centerTitle: true,
             actions: [
               IconButton(
-                icon: const Icon(Icons.favorite),
-                tooltip: 'Favorites',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const FavoritesScreen(),
-                    ),
-                  );
-                },
-              ),
-              IconButton(
                 icon: const Icon(Icons.sort),
                 tooltip: 'Sort',
                 onPressed: () => _openSortModal(context),
@@ -195,7 +232,7 @@ class HomeScreen extends StatelessWidget {
                     hintText: 'Search countries...',
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                 ),

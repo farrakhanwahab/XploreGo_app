@@ -87,7 +87,7 @@ class FilterChips extends StatelessWidget {
           color: colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: colorScheme.primary.withOpacity(0.3),
+            color: colorScheme.primary.withValues(alpha: 0.3),
             width: 1,
           ),
         ),

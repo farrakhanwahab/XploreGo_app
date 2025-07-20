@@ -53,19 +53,19 @@ class CountryDetailScreen extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: colorScheme.shadow.withOpacity(0.2),
+                              color: colorScheme.shadow.withValues(alpha: 0.2),
                               blurRadius: 12,
                               offset: const Offset(0, 6),
                             ),
                           ],
                           border: Border.all(
-                            color: colorScheme.outline.withOpacity(0.3),
+                            color: colorScheme.outline.withValues(alpha: 0.3),
                             width: 3,
                           ),
                         ),
                         child: CircleAvatar(
                           radius: 60,
-                          backgroundColor: colorScheme.surfaceVariant,
+                          backgroundColor: colorScheme.surfaceContainerHighest,
                           child: ClipOval(
                             child: CachedNetworkImage(
                               imageUrl: country.flagUrl,
@@ -235,7 +235,7 @@ class CountryDetailScreen extends StatelessWidget {
                                       width: 56,
                                       height: 56,
                                       decoration: BoxDecoration(
-                                        color: colorScheme.surfaceVariant,
+                                        color: colorScheme.surfaceContainerHighest,
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Icon(Icons.image, color: colorScheme.onSurfaceVariant),
@@ -251,7 +251,7 @@ class CountryDetailScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             ),
-                          )).toList(),
+                          )),
                         ],
                       ),
                     ),

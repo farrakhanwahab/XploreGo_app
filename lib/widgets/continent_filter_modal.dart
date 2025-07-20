@@ -60,7 +60,7 @@ class ContinentFilterModal {
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: colorScheme.outline.withOpacity(0.3),
+                      color: colorScheme.outline.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -93,13 +93,13 @@ class ContinentFilterModal {
                           }
                         });
                       },
-                      backgroundColor: colorScheme.surfaceVariant,
+                      backgroundColor: colorScheme.surfaceContainerHighest,
                       selectedColor: colorScheme.primary,
                       checkmarkColor: colorScheme.onPrimary,
                       side: BorderSide(
                         color: selectedContinents.contains(continent) 
                             ? colorScheme.primary 
-                            : colorScheme.outline.withOpacity(0.3),
+                            : colorScheme.outline.withValues(alpha: 0.3),
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
