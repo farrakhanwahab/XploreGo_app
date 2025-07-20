@@ -12,7 +12,7 @@ class FilterFAB extends StatelessWidget {
     
     return FloatingActionButton(
       onPressed: () => _showFilterMenu(context),
-      backgroundColor: Colors.white,
+      backgroundColor: colorScheme.surface,
       foregroundColor: colorScheme.primary,
       elevation: 8,
       shape: const CircleBorder(),
@@ -21,16 +21,18 @@ class FilterFAB extends StatelessWidget {
   }
 
   void _showFilterMenu(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colorScheme.surface,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
+              color: colorScheme.shadow.withValues(alpha: 0.1),
               blurRadius: 20,
               offset: const Offset(0, -5),
             ),
@@ -46,7 +48,7 @@ class FilterFAB extends StatelessWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.withValues(alpha: 0.3),
+                  color: colorScheme.outline.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -57,7 +59,7 @@ class FilterFAB extends StatelessWidget {
                 'Filter Options',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                     ),
               ),
               const SizedBox(height: 24),
@@ -110,16 +112,18 @@ class FilterFAB extends StatelessWidget {
     required String subtitle,
     required VoidCallback onTap,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
+    
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.grey.withValues(alpha: 0.05),
+          color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Colors.grey.withValues(alpha: 0.1),
+            color: colorScheme.outline.withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -128,12 +132,12 @@ class FilterFAB extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.blue.withValues(alpha: 0.1),
+                color: colorScheme.primaryContainer,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
                 icon,
-                color: Colors.blue,
+                color: colorScheme.onPrimaryContainer,
                 size: 20,
               ),
             ),
@@ -144,10 +148,10 @@ class FilterFAB extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
-                      color: Colors.black87,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -155,7 +159,7 @@ class FilterFAB extends StatelessWidget {
                     subtitle,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey[600],
+                      color: colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
                 ],
@@ -163,7 +167,7 @@ class FilterFAB extends StatelessWidget {
             ),
             Icon(
               Icons.chevron_right,
-              color: Colors.grey[400],
+              color: colorScheme.onSurface.withValues(alpha: 0.4),
             ),
           ],
         ),

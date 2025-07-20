@@ -83,39 +83,37 @@ class _SplashScreenState extends State<SplashScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // App Icon/Logo
-                    Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        color: colorScheme.onPrimary,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.2),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
+                    Image.asset(
+                      'assets/images/splash_icon.png',
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        debugPrint('Error loading splash icon: $error');
+                        return Container(
+                          width: 200,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            color: colorScheme.onPrimary,
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.2),
+                                blurRadius: 20,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.public,
-                        size: 60,
-                        color: colorScheme.primary,
-                      ),
+                          child: Icon(
+                            Icons.public,
+                            size: 60,
+                            color: colorScheme.primary,
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 32),
-                    
-                    // App Name
-                    Text(
-                      'XploreGo',
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                            color: colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 36,
-                          ),
-                    ),
-                    const SizedBox(height: 8),
-                    
+   
                     // Tagline
                     Text(
                       'Discover the World',
