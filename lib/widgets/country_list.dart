@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/country_provider.dart';
 import '../widgets/country_card.dart';
 import '../screens/country_detail_screen.dart';
+import 'package:lottie/lottie.dart';
 
 class CountryList extends StatelessWidget {
   const CountryList({super.key});
@@ -12,8 +13,20 @@ class CountryList extends StatelessWidget {
     return Consumer<CountryProvider>(
       builder: (context, provider, _) {
         if (provider.isLoading) {
-          return const Expanded(
-            child: Center(child: CircularProgressIndicator()),
+          return Expanded(
+            child: Center(
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: Lottie.asset(
+                  'assets/animations/loading.json',
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.contain,
+                  repeat: true,
+                ),
+              ),
+            ),
           );
         }
         

@@ -44,10 +44,10 @@ class _NavBarState extends State<NavBar> {
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
               left: 8 + ((MediaQuery.of(context).size.width - 16) / 3) * widget.currentIndex + 
-                   (((MediaQuery.of(context).size.width - 16) / 3) - 80) / 2,
+                   (((MediaQuery.of(context).size.width - 16) / 3) - 48) / 2,
               top: 0,
               child: Container(
-                width: 80,
+                width: 48,
                 height: 4,
                 decoration: BoxDecoration(
                   color: colorScheme.primary,
@@ -57,26 +57,23 @@ class _NavBarState extends State<NavBar> {
             ),
             // Navigation items
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _buildNavItem(
                     index: 0,
                     icon: Icons.home_outlined,
-                    selectedIcon: Icons.home,
                     colorScheme: colorScheme,
                   ),
                   _buildNavItem(
                     index: 1,
                     icon: Icons.favorite_outline,
-                    selectedIcon: Icons.favorite,
                     colorScheme: colorScheme,
                   ),
                   _buildNavItem(
                     index: 2,
                     icon: Icons.settings_outlined,
-                    selectedIcon: Icons.settings,
                     colorScheme: colorScheme,
                   ),
                 ],
@@ -91,7 +88,6 @@ class _NavBarState extends State<NavBar> {
   Widget _buildNavItem({
     required int index,
     required IconData icon,
-    required IconData selectedIcon,
     required ColorScheme colorScheme,
   }) {
     final isSelected = widget.currentIndex == index;
@@ -100,15 +96,15 @@ class _NavBarState extends State<NavBar> {
       onTap: () {
         _handleTabTap(index);
       },
-              child: SizedBox(
-          width: 80,
-          height: 50,
-          child: Icon(
-          isSelected ? selectedIcon : icon,
+      child: SizedBox(
+        width: 80,
+        height: 40,
+        child: Icon(
+          icon,
           color: isSelected 
               ? colorScheme.primary 
               : colorScheme.onSurface.withValues(alpha: 0.6),
-          size: 32,
+          size: 26,
         ),
       ),
     );

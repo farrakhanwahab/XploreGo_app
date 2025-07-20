@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -126,13 +127,14 @@ class _SplashScreenState extends State<SplashScreen>
                     
                     // Loading indicator
                     SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 3,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          colorScheme.onPrimary.withValues(alpha: 0.8),
-                        ),
+                      width: 120,
+                      height: 120,
+                      child: Lottie.asset(
+                        'assets/animations/loading.json',
+                        width: 120,
+                        height: 120,
+                        fit: BoxFit.contain,
+                        repeat: true,
                       ),
                     ),
                   ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:lottie/lottie.dart';
 import '../models/country.dart';
 
 class CountryCard extends StatelessWidget {
@@ -63,7 +64,19 @@ class CountryCard extends StatelessWidget {
                       width: 60,
                       height: 60,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                      placeholder: (context, url) => Center(
+                        child: SizedBox(
+                          width: 60,
+                          height: 60,
+                          child: Lottie.asset(
+                            'assets/animations/loading.json',
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.contain,
+                            repeat: true,
+                          ),
+                        ),
+                      ),
                       errorWidget: (context, url, error) => const Icon(Icons.flag, color: Colors.grey, size: 32),
                     ),
                   ),

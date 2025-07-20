@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:lottie/lottie.dart';
 import '../models/country.dart';
 import '../providers/country_provider.dart';
 
@@ -13,7 +14,12 @@ class CountryDetailScreen extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return Consumer<CountryProvider>(
       builder: (context, provider, _) {
-        final isFavorite = provider.isFavorite(country);
+        // Always get the latest country object from the provider by name
+        final latestCountry = provider.countries.firstWhere(
+          (c) => c.name == country.name,
+          orElse: () => country,
+        );
+        final isFavorite = provider.isFavorite(latestCountry);
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
@@ -72,7 +78,19 @@ class CountryDetailScreen extends StatelessWidget {
                               width: 120,
                               height: 120,
                               fit: BoxFit.cover,
-                              placeholder: (context, url) => const Center(child: CircularProgressIndicator(strokeWidth: 3)),
+                              placeholder: (context, url) => Center(
+                                child: SizedBox(
+                                  width: 60,
+                                  height: 60,
+                                  child: Lottie.asset(
+                                    'assets/animations/loading.json',
+                                    width: 60,
+                                    height: 60,
+                                    fit: BoxFit.contain,
+                                    repeat: true,
+                                  ),
+                                ),
+                              ),
                               errorWidget: (context, url, error) => const Icon(Icons.flag, color: Colors.grey, size: 48),
                             ),
                           ),
@@ -80,7 +98,7 @@ class CountryDetailScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        country.name,
+                        latestCountry.name,
                         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: colorScheme.onSurface,
@@ -173,7 +191,7 @@ class CountryDetailScreen extends StatelessWidget {
                 ),
                 
                 // Staple food section (if available)
-                if (country.stapleFood != null && country.stapleFood!.isNotEmpty) ...[
+                if (latestCountry.stapleFood != null && latestCountry.stapleFood!.isNotEmpty) ...[
                   const SizedBox(height: 16),
                   Card(
                     elevation: 2,
@@ -191,67 +209,7 @@ class CountryDetailScreen extends StatelessWidget {
                                 ),
                           ),
                           const SizedBox(height: 16),
-                          _buildInfoRow(context, Icons.restaurant, 'Staple Food', country.stapleFood!, colorScheme),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-                
-                // Popular places section (if available)
-                if (country.popularPlaces.isNotEmpty) ...[
-                  const SizedBox(height: 16),
-                  Card(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Popular Places',
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: colorScheme.primary,
-                                ),
-                          ),
-                          const SizedBox(height: 16),
-                          ...country.popularPlaces.map((place) => Card(
-                            margin: const EdgeInsets.only(bottom: 12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                            child: ListTile(
-                              leading: place.imageUrl.isNotEmpty
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                        place.imageUrl,
-                                        width: 56,
-                                        height: 56,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )
-                                  : Container(
-                                      width: 56,
-                                      height: 56,
-                                      decoration: BoxDecoration(
-                                        color: colorScheme.surfaceContainerHighest,
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Icon(Icons.image, color: colorScheme.onSurfaceVariant),
-                                    ),
-                              title: Text(
-                                place.name,
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                              ),
-                              subtitle: Text(
-                                place.description,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            ),
-                          )),
+                          _buildInfoRow(context, Icons.restaurant, 'Staple Food', latestCountry.stapleFood!, colorScheme),
                         ],
                       ),
                     ),

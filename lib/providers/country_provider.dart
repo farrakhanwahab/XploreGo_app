@@ -41,6 +41,30 @@ class CountryProvider extends ChangeNotifier {
       final countries = await CountryService.fetchCountries();
       _countries = countries;
       _filteredCountries = _countries;
+      notifyListeners();
+      // Fetch staple food for each country in the background
+      for (final country in _countries) {
+        CountryService.fetchStapleFood(country.name).then((stapleFood) {
+          if (stapleFood != null && stapleFood.isNotEmpty) {
+            final index = _countries.indexOf(country);
+            if (index != -1) {
+              _countries[index] = Country(
+                name: country.name,
+                flagUrl: country.flagUrl,
+                capital: country.capital,
+                continent: country.continent,
+                population: country.population,
+                currencyName: country.currencyName,
+                currencySymbol: country.currencySymbol,
+                languages: country.languages,
+                stapleFood: stapleFood,
+              );
+              _filteredCountries = _countries;
+              notifyListeners();
+            }
+          }
+        });
+      }
     } catch (e) {
       _error = e.toString();
     } finally {

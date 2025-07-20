@@ -18,4 +18,21 @@ class CountryService {
       rethrow;
     }
   }
+
+  static Future<String?> fetchStapleFood(String countryName) async {
+    final cuisineTitle = 'Cuisine_of_${countryName.replaceAll(' ', '_')}';
+    final url = 'https://en.wikipedia.org/api/rest_v1/page/summary/$cuisineTitle';
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['extract'] != null && data['extract'].toString().isNotEmpty) {
+          return data['extract'];
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+    return null;
+  }
 } 

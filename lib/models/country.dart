@@ -8,7 +8,6 @@ class Country {
   final String currencySymbol;
   final List<String> languages;
   final String? stapleFood;
-  final List<Place> popularPlaces;
 
   Country({
     required this.name,
@@ -20,7 +19,6 @@ class Country {
     required this.currencySymbol,
     required this.languages,
     this.stapleFood,
-    required this.popularPlaces,
   });
 
   factory Country.fromJson(Map<String, dynamic> json) {
@@ -48,20 +46,7 @@ class Country {
       currencyName: currencyName,
       currencySymbol: currencySymbol,
       languages: languages,
-      stapleFood: null, // To be filled from hardcoded or external source
-      popularPlaces: [], // To be filled from hardcoded or external source
+      stapleFood: null, // To be filled from MediaWiki API
     );
   }
-}
-
-class Place {
-  final String name;
-  final String imageUrl;
-  final String description;
-
-  Place({
-    required this.name,
-    required this.imageUrl,
-    required this.description,
-  });
 } 
