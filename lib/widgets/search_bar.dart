@@ -13,7 +13,7 @@ class CountrySearchBar extends StatelessWidget {
     return Consumer<CountryProvider>(
       builder: (context, provider, _) {
         return Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Row(
             children: [
               // Search field (reduced width)
@@ -27,6 +27,8 @@ class CountrySearchBar extends StatelessWidget {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
+                    isDense: true,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                   ),
                 ),
               ),

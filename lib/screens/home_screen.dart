@@ -74,6 +74,9 @@ class _HomeContent extends StatelessWidget {
       appBar: AppBar(
         title: const Text('XploreGo'),
         centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        elevation: 0,
+        toolbarHeight: 44,
       ),
       body: Column(
         children: [

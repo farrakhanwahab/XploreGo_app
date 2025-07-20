@@ -36,51 +36,50 @@ class _NavBarState extends State<NavBar> {
           ),
         ),
       ),
-      child: SafeArea(
-        child: Stack(
-          children: [
-            // Sliding indicator
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              left: 8 + ((MediaQuery.of(context).size.width - 16) / 3) * widget.currentIndex + 
-                   (((MediaQuery.of(context).size.width - 16) / 3) - 48) / 2,
-              top: 0,
-              child: Container(
-                width: 48,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: colorScheme.primary,
-                  borderRadius: BorderRadius.circular(2),
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Stack(
+        children: [
+          // Sliding indicator
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            left: 8 + ((MediaQuery.of(context).size.width - 16) / 3) * widget.currentIndex + 
+                 (((MediaQuery.of(context).size.width - 16) / 3) - 48) / 2,
+            top: 0,
+            child: Container(
+              width: 48,
+              height: 4,
+              decoration: BoxDecoration(
+                color: colorScheme.primary,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          // Navigation items
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildNavItem(
+                  index: 0,
+                  icon: Icons.home_outlined,
+                  colorScheme: colorScheme,
                 ),
-              ),
+                _buildNavItem(
+                  index: 1,
+                  icon: Icons.favorite_outline,
+                  colorScheme: colorScheme,
+                ),
+                _buildNavItem(
+                  index: 2,
+                  icon: Icons.settings_suggest_outlined,
+                  colorScheme: colorScheme,
+                ),
+              ],
             ),
-            // Navigation items
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildNavItem(
-                    index: 0,
-                    icon: Icons.home_outlined,
-                    colorScheme: colorScheme,
-                  ),
-                  _buildNavItem(
-                    index: 1,
-                    icon: Icons.favorite_outline,
-                    colorScheme: colorScheme,
-                  ),
-                  _buildNavItem(
-                    index: 2,
-                    icon: Icons.settings_outlined,
-                    colorScheme: colorScheme,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

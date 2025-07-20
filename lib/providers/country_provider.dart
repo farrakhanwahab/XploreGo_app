@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/country.dart';
 import '../services/country_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class CountryProvider extends ChangeNotifier {
   List<Country> _countries = [];
@@ -38,10 +39,35 @@ class CountryProvider extends ChangeNotifier {
     _error = null;
     notifyListeners();
     try {
+      // Try to load from cache first
+      final prefs = await SharedPreferences.getInstance();
+      final cached = prefs.getString('country_list');
+      if (cached != null) {
+        final List<dynamic> data = json.decode(cached);
+        _countries = data.map((json) => Country.fromJson(json)).toList();
+        _filteredCountries = _countries;
+        notifyListeners();
+      }
+      // Fetch from API in background
       final countries = await CountryService.fetchCountries();
-      _countries = countries;
-      _filteredCountries = _countries;
-      notifyListeners();
+      // If the fetched data is different from cache, update cache and UI
+      final fetchedJson = json.encode(countries.map((c) => {
+        'name': {'common': c.name},
+        'flags': {'png': c.flagUrl},
+        'capital': [c.capital],
+        'continents': [c.continent],
+        'population': c.population,
+        'currencies': {
+          'main': {'name': c.currencyName, 'symbol': c.currencySymbol}
+        },
+        'languages': {for (var lang in c.languages) lang: lang},
+      }).toList());
+      if (fetchedJson != cached) {
+        await prefs.setString('country_list', fetchedJson);
+        _countries = countries;
+        _filteredCountries = _countries;
+        notifyListeners();
+      }
       // Fetch staple food for each country in the background
       for (final country in _countries) {
         CountryService.fetchStapleFood(country.name).then((stapleFood) {

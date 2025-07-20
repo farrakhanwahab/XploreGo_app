@@ -66,12 +66,12 @@ class CountryCard extends StatelessWidget {
                       fit: BoxFit.cover,
                       placeholder: (context, url) => Center(
                         child: SizedBox(
-                          width: 60,
-                          height: 60,
+                          width: 45,
+                          height: 45,
                           child: Lottie.asset(
                             'assets/animations/loading.json',
-                            width: 60,
-                            height: 60,
+                            width: 45,
+                            height: 45,
                             fit: BoxFit.contain,
                             repeat: true,
                           ),

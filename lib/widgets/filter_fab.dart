@@ -38,67 +38,71 @@ class FilterFAB extends StatelessWidget {
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Handle
-              Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: colorScheme.outline.withValues(alpha: 0.3),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const SizedBox(height: 24),
-              
-              // Title
-              Text(
-                'Filter Options',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Handle
+                  Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: colorScheme.outline.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(2),
                     ),
+                  ),
+                  const SizedBox(height: 24),
+                  
+                  // Title
+                  Text(
+                    'Filter Options',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
+                        ),
+                  ),
+                  const SizedBox(height: 24),
+                  
+                  // Filter Options
+                  _buildFilterOption(
+                    context,
+                    icon: Icons.public,
+                    title: 'Filter by Continent',
+                    subtitle: 'Select continents to filter countries',
+                    onTap: () {
+                      Navigator.pop(context);
+                      ContinentFilterModal.show(context);
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  _buildFilterOption(
+                    context,
+                    icon: Icons.language,
+                    title: 'Filter by Language',
+                    subtitle: 'Select languages to filter countries',
+                    onTap: () {
+                      Navigator.pop(context);
+                      LanguageFilterModal.show(context);
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  _buildFilterOption(
+                    context,
+                    icon: Icons.attach_money,
+                    title: 'Filter by Currency',
+                    subtitle: 'Select currencies to filter countries',
+                    onTap: () {
+                      Navigator.pop(context);
+                      CurrencyFilterModal.show(context);
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                ],
               ),
-              const SizedBox(height: 24),
-              
-              // Filter Options
-              _buildFilterOption(
-                context,
-                icon: Icons.public,
-                title: 'Filter by Continent',
-                subtitle: 'Select continents to filter countries',
-                onTap: () {
-                  Navigator.pop(context);
-                  ContinentFilterModal.show(context);
-                },
-              ),
-              const SizedBox(height: 12),
-              _buildFilterOption(
-                context,
-                icon: Icons.language,
-                title: 'Filter by Language',
-                subtitle: 'Select languages to filter countries',
-                onTap: () {
-                  Navigator.pop(context);
-                  LanguageFilterModal.show(context);
-                },
-              ),
-              const SizedBox(height: 12),
-              _buildFilterOption(
-                context,
-                icon: Icons.attach_money,
-                title: 'Filter by Currency',
-                subtitle: 'Select currencies to filter countries',
-                onTap: () {
-                  Navigator.pop(context);
-                  CurrencyFilterModal.show(context);
-                },
-              ),
-              const SizedBox(height: 24),
-            ],
+            ),
           ),
         ),
       ),

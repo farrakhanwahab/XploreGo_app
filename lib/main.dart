@@ -4,8 +4,14 @@ import 'providers/country_provider.dart';
 import 'providers/theme_provider.dart';
 import 'theme/app_theme.dart';
 import 'screens/splash_screen.dart';
+// import 'package:device_preview/device_preview.dart';
 
 void main() {
+  // For development, uncomment below and comment the next line:
+  // runApp(DevicePreview(
+  //   enabled: !bool.fromEnvironment('dart.vm.product'),
+  //   builder: (context) => const MyApp(),
+  // ));
   runApp(const MyApp());
 }
 
@@ -28,6 +34,9 @@ class MyApp extends StatelessWidget {
             themeMode: themeProvider.themeMode,
             home: const SplashScreen(),
             debugShowCheckedModeBanner: false,
+            // builder: DevicePreview.appBuilder,
+            // useInheritedMediaQuery: true,
+            // locale: DevicePreview.locale(context),
           );
         },
       ),
