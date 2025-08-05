@@ -11,7 +11,7 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CountryProvider>(
       builder: (context, provider, _) {
-        final favoriteCountries = provider.countries
+        final favoriteCountries = provider.allCountries
             .where((c) => provider.isFavorite(c))
             .toList();
         return Scaffold(

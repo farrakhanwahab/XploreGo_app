@@ -19,6 +19,7 @@ class CountryProvider extends ChangeNotifier {
   String _sort = 'Name (A–Z)';
 
   List<Country> get countries => _filteredCountries;
+  List<Country> get allCountries => _countries;
   bool get isLoading => _isLoading;
   String? get error => _error;
   String get searchQuery => _searchQuery;
