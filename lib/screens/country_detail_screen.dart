@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
 import '../models/country.dart';
 import '../providers/country_provider.dart';
+import '../utils/snackbar_utils.dart';
 
 class CountryDetailScreen extends StatelessWidget {
   final Country country;
@@ -40,7 +41,10 @@ class CountryDetailScreen extends StatelessWidget {
                     size: 28,
                   ),
                 ),
-                onPressed: () => provider.toggleFavorite(country),
+                onPressed: () {
+                  final wasAdded = provider.toggleFavorite(country);
+                  SnackbarUtils.showFavoriteMessage(context, country.name, wasAdded);
+                },
                 tooltip: isFavorite ? 'Remove from favorites' : 'Add to favorites',
               ),
             ],

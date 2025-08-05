@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
 import '../models/country.dart';
+import '../utils/snackbar_utils.dart';
 
 class CountryCard extends StatelessWidget {
   final Country country;
   final VoidCallback? onTap;
   final bool isFavorite;
-  final VoidCallback? onFavoriteToggle;
+  final Function(Country)? onFavoriteToggle;
 
   const CountryCard({
     super.key,
@@ -157,7 +158,12 @@ class CountryCard extends StatelessWidget {
                     size: 28,
                   ),
                 ),
-                onPressed: onFavoriteToggle,
+                onPressed: () {
+                  if (onFavoriteToggle != null) {
+                    final wasAdded = onFavoriteToggle!(country);
+                    SnackbarUtils.showFavoriteMessage(context, country.name, wasAdded);
+                  }
+                },
                 tooltip: isFavorite ? 'Remove from favorites' : 'Add to favorites',
               ),
             ],

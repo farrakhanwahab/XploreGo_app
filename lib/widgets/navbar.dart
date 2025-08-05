@@ -58,27 +58,27 @@ class _NavBarState extends State<NavBar> {
           // Navigation items
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildNavItem(
-                  index: 0,
-                  icon: Icons.home_outlined,
-                  colorScheme: colorScheme,
-                ),
-                _buildNavItem(
-                  index: 1,
-                  icon: Icons.favorite_outline,
-                  colorScheme: colorScheme,
-                ),
-                _buildNavItem(
-                  index: 2,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(
+                index: 0,
+                icon: Icons.home_outlined,
+                colorScheme: colorScheme,
+              ),
+              _buildNavItem(
+                index: 1,
+                icon: Icons.favorite_outline,
+                colorScheme: colorScheme,
+              ),
+              _buildNavItem(
+                index: 2,
                   icon: Icons.settings_suggest_outlined,
-                  colorScheme: colorScheme,
-                ),
-              ],
-            ),
+                colorScheme: colorScheme,
+              ),
+            ],
           ),
+        ),
         ],
       ),
     );
@@ -100,9 +100,9 @@ class _NavBarState extends State<NavBar> {
         height: 40,
         child: Icon(
           icon,
-          color: isSelected 
-              ? colorScheme.primary 
-              : colorScheme.onSurface.withValues(alpha: 0.6),
+              color: isSelected 
+                  ? colorScheme.primary 
+                  : colorScheme.onSurface.withValues(alpha: 0.6),
           size: 26,
         ),
       ),

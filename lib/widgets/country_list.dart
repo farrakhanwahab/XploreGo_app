@@ -52,7 +52,7 @@ class CountryList extends StatelessWidget {
                   );
                 },
                 isFavorite: provider.isFavorite(country),
-                onFavoriteToggle: () => provider.toggleFavorite(country),
+                onFavoriteToggle: (country) => provider.toggleFavorite(country),
               );
             },
           ),

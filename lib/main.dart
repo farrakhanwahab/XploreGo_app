@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
-          return MaterialApp(
+    return MaterialApp(
             title: 'XploreGo',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             // locale: DevicePreview.locale(context),
           );
         },
-      ),
+        ),
     );
   }
 }

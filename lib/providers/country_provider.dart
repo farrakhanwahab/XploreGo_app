@@ -122,14 +122,18 @@ class CountryProvider extends ChangeNotifier {
     await prefs.setStringList('favorites', _favoriteCountryNames.toList());
   }
 
-  void toggleFavorite(Country country) {
+  bool toggleFavorite(Country country) {
+    bool wasAdded;
     if (_favoriteCountryNames.contains(country.name)) {
       _favoriteCountryNames.remove(country.name);
+      wasAdded = false;
     } else {
       _favoriteCountryNames.add(country.name);
+      wasAdded = true;
     }
     _saveFavorites();
     notifyListeners();
+    return wasAdded;
   }
 
   bool isFavorite(Country country) => _favoriteCountryNames.contains(country.name);

@@ -28,7 +28,7 @@ class FavoritesScreen extends StatelessWidget {
                     return CountryCard(
                       country: country,
                       isFavorite: true,
-                      onFavoriteToggle: () => provider.toggleFavorite(country),
+                      onFavoriteToggle: (country) => provider.toggleFavorite(country),
                       onTap: () {
                         Navigator.push(
                           context,
