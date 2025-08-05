@@ -19,10 +19,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   late PageController _pageController;
-  final GlobalKey<_HomeContentState> _homeContentKey = GlobalKey<_HomeContentState>();
 
   final List<Widget> _screens = [
-    _HomeContent(key: GlobalKey<_HomeContentState>()),
+    const _HomeContent(),
     const FavoritesScreen(),
     const SettingsScreen(),
   ];
@@ -83,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _HomeContent extends StatefulWidget {
-  const _HomeContent({super.key});
+  const _HomeContent();
 
   @override
   State<_HomeContent> createState() => _HomeContentState();
