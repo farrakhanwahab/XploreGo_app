@@ -24,7 +24,7 @@ A Flutter app for exploring countries around the world with detailed information
 1. Download the latest APK from the link above
 2. Enable "Install from Unknown Sources" in your Android settings
 3. Install the APK file
-4. Start getting motivated daily! 
+4. Enjoy exploring countries!
 
 ### System Requirements
 - **Android:** 5.0 (API level 21) or higher
