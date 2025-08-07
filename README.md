@@ -20,6 +20,7 @@ A Flutter app for exploring countries around the world with detailed information
 <a href="https://github.com/farrakhanwahab/XploreGo_app/releases/download/v1.0.0/XploreGo_v1.0.0.apk">
   <img src="https://img.shields.io/badge/Download-APK%20v1.0.0-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Download APK">
 </a>
+
 1. Download the latest APK from the link above
 2. Enable "Install from Unknown Sources" in your Android settings
 3. Install the APK file
